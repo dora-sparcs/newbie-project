@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import FrontPage from "./components/front-page";
+import TodosPage from "./components/todos-page";
+
+import logo from "./logo.svg";
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="container">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="https://codingthesmartway.com" target="_blank">
+              <img src={logo} width="30" height="30" alt="CodingTheSmartWay.com" />
+            </a>
+            <Link to="/" className="navbar-brand">SPARCS Newbie Project</Link>
+            <div className="collpase navbar-collapse">
+              <ul className="navbar-nav mr-auto">
+                <li className="navbar-item">
+                  <Link to="/todos" className="nav-link">Todos</Link>
+                </li>
+                <li className="navbar-item">
+                  <Link to="/another" className="nav-link">Another</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <br/>
+
+          <div className="container">
+            <Route path="/" exact component={FrontPage} />
+            <Route path="/todos" component={TodosPage} />
+          </div>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
