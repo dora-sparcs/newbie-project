@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const Category = props => (
+  <option>{props.category.category_name}</option>
+);
+
 export default class EditTodo extends Component {
   constructor(props) {
     super(props);
@@ -12,10 +16,13 @@ export default class EditTodo extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      todo_description: "",
-      todo_date: "",
-      todo_category: "",
-      todo_completed: false
+      todos: {
+        todo_description: "",
+        todo_date: "",
+        todo_category: "",
+        todo_completed: false,
+      },
+      categories: [],
     }
   }
 
@@ -24,12 +31,22 @@ export default class EditTodo extends Component {
           .then(response => {
             this.setState({
               todo_description: response.data.todo_description,
-              todo_date: response.data.todo_date,
+              todo_date: response.data.todo_date.substring(0, 10),
               todo_category: response.data.todo_category,
               todo_completed: response.data.todo_completed
             });
           })
           .catch(error => {
+            console.log(error);
+          });
+    axios.get('http://localhost:4018/newbie-project/categories')
+          .then(response => {
+            this.setState(prevState => ({
+              ...prevState,
+              categories: response.data
+            }))
+          })
+          .catch(function(error){
             console.log(error);
           });
   }
@@ -79,6 +96,12 @@ export default class EditTodo extends Component {
           });
   }
 
+  categoryList() {
+    return this.state.categories.map((currentCategory, index) => {
+      return <Category category={currentCategory} key={index} />
+    })
+  }
+
   render() {
     return (
       <div className="row">
@@ -97,7 +120,7 @@ export default class EditTodo extends Component {
               <label>Date: </label>
               <input type="date"
                       className="form-control"
-                      value={this.state.todo_date.substring(0, 10)}
+                      value={this.state.todo_date}
                       onChange={this.onChangeTodoDate}
                       />
             </div>
@@ -107,9 +130,8 @@ export default class EditTodo extends Component {
                       value={this.state.todo_category}
                       onChange={this.onChangeTodoCategory}
                       >
-                <option selected disabled hidden> -- Select a category -- </option>
-                <option>Homework</option>
-                <option>SPARCS</option>
+                <option disabled hidden> -- Select a category -- </option>
+                { this.categoryList() }
               </select>
             </div>
             <div className="form-check">

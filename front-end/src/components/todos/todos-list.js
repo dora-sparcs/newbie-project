@@ -15,6 +15,9 @@ const Todo = props => (
     <td className={props.todo.todo_completed ? 'completed' : ''}>
       <Link to={"todos/edit/"+props.todo._id}>Edit</Link>
     </td>
+    <td>
+      <Link onClick={props.onChange}>Delete</Link>
+    </td>
   </tr>
 );
 
@@ -22,6 +25,9 @@ export default class TodosList extends Component {
 
   constructor(props) {
     super(props);
+
+    this.onDelete = this.onDelete.bind(this);
+
     this.state = {
       todos: [],
       categories: [],
@@ -51,13 +57,34 @@ export default class TodosList extends Component {
           });
   }
 
+  onDelete = (index) => (
+    (e) => {
+      e.preventDefault();
+      this.state.todos.map(
+        (todo, idx) => {
+          if(idx === index) {
+            axios.delete('http://localhost:4018/newbie-project/todos/delete/'+todo._id, todo)
+                  .then(res => {
+                    console.log(res.data)
+                    this.props.history.push('/todos');
+                  });
+          }
+        }
+      )
+      window.location.reload(true);
+    }
+  )
+
   todoList() {
-    Category = this.state.categories.map(function(currentCategory, i){
+    Category = this.state.categories.map(function(currentCategory, index){
       return currentCategory.category_selected ? currentCategory.category_name : null;
     });
 
-    return this.state.todos.map(function(currentTodo, i){
-      return <Todo todo={currentTodo} key={i} />;
+    return this.state.todos.map(function(currentTodo, index){
+      return <Todo todo={currentTodo}
+                        onChange={this.onDelete(index)}
+                        key={index}
+                        />
     }).sort((todo1, todo2) => {
       const todo_completed1 = todo1.props.todo.todo_completed
       const todo_completed2 = todo2.props.todo.todo_completed
@@ -73,15 +100,15 @@ export default class TodosList extends Component {
     return (
       <div className="row">
         <div className="col-md-9">
-          <h3>Todos List </h3>
-          <Link to="/todos/create">+ Add Todo</Link>
+          <h3>Todo List </h3>
+          <Link to="/todos/create">+ Create Todo</Link>
           <table className="table" style={{ marginTop: 20 }} >
             <thead>
               <tr>
                 <th>Description</th>
                 <th>Date</th>
                 <th>Category</th>
-                <th>Action</th>
+                <th colspan="2">Action</th>
               </tr>
             </thead>
             <tbody>
