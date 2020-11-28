@@ -198,7 +198,7 @@ export default class EditAccount extends Component {
               <select className="form-control"
                       onChange={this.onChangeAccountCategory}
                       >
-                <option disabled selected value> -- Select a category -- </option>
+                <option disabled value> -- Select a category -- </option>
                 { this.categoryList() }
               </select>
             </div>

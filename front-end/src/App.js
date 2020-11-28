@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import FrontPage from "./components/front-page";
 import TodosPage from "./components/todos-page";
+import AccountsPage from "./components/accounts-page";
 
 import logo from "./logo.svg";
 
@@ -24,7 +25,7 @@ class App extends Component {
                   <Link to="/todos" className="nav-link">Todos</Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/another" className="nav-link">Another</Link>
+                  <Link to="/accounts" className="nav-link">Accounts</Link>
                 </li>
               </ul>
             </div>
@@ -34,6 +35,7 @@ class App extends Component {
           <div className="container">
             <Route path="/" exact component={FrontPage} />
             <Route path="/todos" component={TodosPage} />
+            <Route path="/accounts" component={AccountsPage} />
           </div>
         </div>
       </Router>

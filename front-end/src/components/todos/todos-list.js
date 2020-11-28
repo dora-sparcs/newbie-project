@@ -7,19 +7,21 @@ import CategoriesList from "./categories-list";
 
 var Category = [];
 
-const Todo = props => (
-  <tr className={Category.indexOf(props.todo.todo_category)!== -1 ? 'chosen' : 'unchosen'}>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_date != null ? props.todo.todo_date.substring(0, 10) : ""}</td>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_category}</td>
-    <td className={props.todo.todo_completed ? 'completed' : ''}>
-      <Link to={"todos/edit/"+props.todo._id}>Edit</Link>
-    </td>
-    <td>
-      <Link onClick={props.onChange}>Delete</Link>
-    </td>
-  </tr>
-);
+const Todo = props => {
+  return(
+    <tr className={Category.indexOf(props.todo.todo_category)!== -1 ? 'chosen' : 'unchosen'}>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_date != null ? props.todo.todo_date.substring(0, 10) : ""}</td>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_category}</td>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>
+        <Link to={"todos/edit/"+props.todo._id}>Edit</Link>
+      </td>
+      <td className={props.todo.todo_completed ? 'completed' : ''}>
+        <Link onClick={props.onChange}>Delete</Link>
+      </td>
+    </tr>
+  )
+};
 
 export default class TodosList extends Component {
 
@@ -45,6 +47,7 @@ export default class TodosList extends Component {
           .catch(function(error){
             console.log(error);
           });
+
     axios.get('http://localhost:4018/newbie-project/categories')
           .then(response => {
             this.setState(prevState => ({
@@ -80,11 +83,11 @@ export default class TodosList extends Component {
       return currentCategory.category_selected ? currentCategory.category_name : null;
     });
 
-    return this.state.todos.map(function(currentTodo, index){
+    return this.state.todos.map((currentTodo, index) => {
       return <Todo todo={currentTodo}
-                        onChange={this.onDelete(index)}
-                        key={index}
-                        />
+                    onChange={this.onDelete(index)}
+                    key={index}
+                    />
     }).sort((todo1, todo2) => {
       const todo_completed1 = todo1.props.todo.todo_completed
       const todo_completed2 = todo2.props.todo.todo_completed

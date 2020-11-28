@@ -25,3 +25,11 @@ code {
   color: #abcd;
   display: none;
 }
+
+.income {
+  color: #12436e;
+}
+
+.outcome {
+  color: #6e1212;
+}

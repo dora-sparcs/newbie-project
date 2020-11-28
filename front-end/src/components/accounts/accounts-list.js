@@ -55,6 +55,7 @@ export default class AccountsList extends Component {
       this.state.accounts.map(
         (account, idx) => {
           if(idx === index) {
+            console.log(account._id)
             axios.delete('http://localhost:4018/newbie-project/accounts/delete/'+account._id, account)
                   .then(res => {
                     console.log(res.data)
