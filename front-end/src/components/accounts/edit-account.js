@@ -187,6 +187,7 @@ export default class EditAccount extends Component {
             <div className="form-group">
               <label>Source: </label>
               <select className="form-control"
+                      value={this.state.account_source}
                       onChange={this.onChangeAccountSource}
                       >
                 { this.sourceList() }
@@ -196,6 +197,7 @@ export default class EditAccount extends Component {
             <div className="form-group">
               <label>Category: </label>
               <select className="form-control"
+                      value={this.state.account_category}
                       onChange={this.onChangeAccountCategory}
                       >
                 <option disabled value> -- Select a category -- </option>
