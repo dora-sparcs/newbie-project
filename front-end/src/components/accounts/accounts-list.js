@@ -92,9 +92,9 @@ export default class AccountsList extends Component {
     var totalOutcome = 0;
     this.state.accounts.map((currentAccount, index) => {
       if(currentAccount.account_inout) totalIncome += currentAccount.account_money;
-      else totalOutcome += currentAccount.account_money;
+      else totalOutcome = currentAccount.account_money;
     })
-    var total = totalIncome + totalOutcome;
+    var total = totalIncome - totalOutcome;
     return [total, totalIncome, totalOutcome];
   }
 

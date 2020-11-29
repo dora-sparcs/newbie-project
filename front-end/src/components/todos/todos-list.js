@@ -10,7 +10,7 @@ var Category = [];
 const Todo = props => {
   return(
     <tr className={Category.indexOf(props.todo.todo_category)!== -1 ? 'chosen' : 'unchosen'}>
-      <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
+      <td className={props.todo.todo_completed ? 'completed left' : 'left'}>{props.todo.todo_description}</td>
       <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_date != null ? props.todo.todo_date.substring(0, 10) : ""}</td>
       <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_category}</td>
       <td className={props.todo.todo_completed ? 'completed taction' : 'taction'}>
