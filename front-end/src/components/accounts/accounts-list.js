@@ -9,7 +9,7 @@ const Account = props => {
   return(
     <tr>
       <td>{props.account.account_date != null ? props.account.account_date.substring(0, 10) : ""}</td>
-      <td>{props.account.account_description}</td>
+      <td className="left">{props.account.account_description}</td>
       {Source.map(function(currentSource){
         return <td className={props.account.account_inout === true ? "income" : "outcome"}>{props.account.account_source === currentSource ? ((props.account.account_inout === true ? "+" : "-") + props.account.account_money + "원") : null}</td>
       })}
@@ -83,7 +83,7 @@ export default class AccountsList extends Component {
 
   sourceHeader() {
     return Source.map(function(currentSource){
-      return <th>{currentSource}</th>
+      return <th className="tmoney">{currentSource}</th>
     })
   }
 
@@ -107,13 +107,12 @@ export default class AccountsList extends Component {
           <table className="table table-bordered" style={{ marginTop: 20 }} >
             <thead>
               <tr>
-                <th rowspan="2">Date</th>
+                <th rowspan="2" className="tdate">Date</th>
                 <th rowspan="2">Description</th>
-                <th colspan="3">Source</th>
+                { this.sourceHeader() }
                 <th rowspan="2">Category</th>
                 <th rowspan="2" colspan="2">Action</th>
               </tr>
-              <tr>{ this.sourceHeader() }</tr>
             </thead>
             <tbody>
               { this.accountList() }
@@ -122,9 +121,9 @@ export default class AccountsList extends Component {
               <tr>
                 <td colspan="4"></td>
                 <td>Total</td>
-                <td>{ this.totalInOut()[0] > 0 ? "+" : "" }{ this.totalInOut()[0] }원</td>
-                <td className="income">+{ this.totalInOut()[1] }원</td>
-                <td className="outcome">-{ this.totalInOut()[2] }원</td>
+                <td className="tmoney">{ this.totalInOut()[0] > 0 ? "+" : "" }{ this.totalInOut()[0] }원</td>
+                <td className="income tmoney">+{ this.totalInOut()[1] }원</td>
+                <td className= "outcome tmoney">-{ this.totalInOut()[2] }원</td>
               </tr>
             </tfoot>
           </table>

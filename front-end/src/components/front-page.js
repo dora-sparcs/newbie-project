@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+import dora from "./dora.jpg";
+
 export default class FirstPage extends Component {
     render() {
         return (
             <div>
-                <p>Welcome to First Page Component!!</p>
+                <img src={dora} className="center" alt="Dora is cute" width="80%"/>
             </div>
         )
     }

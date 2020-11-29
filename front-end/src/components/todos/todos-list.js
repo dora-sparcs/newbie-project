@@ -13,10 +13,10 @@ const Todo = props => {
       <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
       <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_date != null ? props.todo.todo_date.substring(0, 10) : ""}</td>
       <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_category}</td>
-      <td className={props.todo.todo_completed ? 'completed' : ''}>
+      <td className={props.todo.todo_completed ? 'completed' : ''} className="taction">
         <Link to={"todos/edit/"+props.todo._id}>Edit</Link>
       </td>
-      <td className={props.todo.todo_completed ? 'completed' : ''}>
+      <td className={props.todo.todo_completed ? 'completed' : ''} className="taction">
         <Link onClick={props.onChange}>Delete</Link>
       </td>
     </tr>
@@ -109,7 +109,7 @@ export default class TodosList extends Component {
             <thead>
               <tr>
                 <th>Description</th>
-                <th>Date</th>
+                <th className="tdate">Date</th>
                 <th>Category</th>
                 <th colspan="2">Action</th>
               </tr>

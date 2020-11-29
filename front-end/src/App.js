@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,9 +15,7 @@ class App extends Component {
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="https://codingthesmartway.com" target="_blank">
-              <img src={logo} width="30" height="30" alt="CodingTheSmartWay.com" />
-            </a>
+            <img src={logo} width="30" height="30" alt="CodingTheSmartWay.com" />
             <Link to="/" className="navbar-brand">SPARCS Newbie Project</Link>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
