@@ -1,7 +1,7 @@
 const Todo = require('../models/todo-model')
 const Category = require('../models/category-model')
 
-getTodos = async(req, res) => {
+const getTodos = async(req, res) => {
   await Todo.find({}, (err, todos) => {
     if(err) {
       return res.status(400).json({ success: false, error: err })
@@ -15,14 +15,14 @@ getTodos = async(req, res) => {
   .catch(err => console.log(err))
 }
 
-getTodo = (req, res) => {
+const getTodo = (req, res) => {
   let id = req.params.id;
   Todo.findById(id, function(err, todo) {
     res.json(todo);
   });
 }
 
-createTodo = (req, res) => {
+const createTodo = (req, res) => {
   const body = req.body
 
   if (!body) {
@@ -54,7 +54,7 @@ createTodo = (req, res) => {
       })
 }
 
-editTodo = async(req, res) => {
+const editTodo = async(req, res) => {
   const body = req.body
 
   if(!body) {
@@ -92,7 +92,7 @@ editTodo = async(req, res) => {
   })
 }
 
-deleteTodo = async(req, res) => {
+const deleteTodo = async(req, res) => {
   const body = req.body
 
   if(!body) {
@@ -117,7 +117,7 @@ deleteTodo = async(req, res) => {
   })
 }
 
-getCategories = async(req, res) => {
+const getCategories = async(req, res) => {
   await Category.find({}, (err, categories) => {
     if(err) {
       return res.status(400).json({ success: false, error: err })
@@ -163,54 +163,7 @@ createCategory = (req, res) => {
           })
 }
 
-// editCategory = async(req, res) => {
-//   const body = req.body
-//
-//   if(!body) {
-//     return res.status(400).json({
-//       success: false,
-//       error: 'You must provide a body to update',
-//     })
-//   }
-//   for(var key in body.categories) {
-//     var obj = body.categories[key];
-//     console.log("obj");
-//     console.log(obj);
-//
-//     Category.findById({ _id: obj._id }, (err, category) => {
-//       console.log("category")
-//       console.log(category)
-//       if(err) {
-//         return res.status(404).json({
-//           err,
-//           message: 'Category not found!',
-//         })
-//       }
-//       console.log("obj");
-//       console.log(obj);
-//       category.category_name = obj.category_name
-//       category.category_selected = obj.category_selected
-//       console.log("category")
-//       console.log(category)
-//       category.save()
-//               .then(() => {
-//                 return res.status(200).json({
-//                   success: true,
-//                   id: category._id,
-//                   message: 'Category updated!',
-//                 })
-//               })
-//               .catch(error => {
-//                 return res.status(404).json({
-//                   error,
-//                   message: 'Category not updated!',
-//                 })
-//               })
-//     })
-//   }
-// }
-
-editCategory = async(req, res) => {
+const editCategory = async(req, res) => {
   const body = req.body
 
   if(!body) {

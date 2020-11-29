@@ -1,6 +1,6 @@
 const Account = require('../models/account-model')
 
-getAccounts = async(req, res) => {
+const getAccounts = async(req, res) => {
   await Account.find({}, (err, accounts) => {
     if(err) {
       return res.status(400).json({ success: false, error: err })
@@ -14,14 +14,14 @@ getAccounts = async(req, res) => {
   .catch(err => console.log(err))
 }
 
-getAccount = (req, res) => {
+const getAccount = (req, res) => {
   let id = req.params.id;
   Account.findById(id, function(err, account) {
     res.json(account);
   });
 }
 
-createAccount = (req, res) => {
+const createAccount = (req, res) => {
   const body = req.body
 
   if (!body) {
@@ -53,7 +53,7 @@ createAccount = (req, res) => {
       })
 }
 
-editAccount = async(req, res) => {
+const editAccount = async(req, res) => {
   const body = req.body
 
   if(!body) {
@@ -93,7 +93,7 @@ editAccount = async(req, res) => {
   })
 }
 
-deleteAccount = async(req, res) => {
+const deleteAccount = async(req, res) => {
   const body = req.body
 
   if(!body) {
